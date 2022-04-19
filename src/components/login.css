@@ -1,10 +1,10 @@
-.form-login-container{
-  display: flex;
+.form-login-container {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: center;
-	align-items: center;
-	align-content: stretch;
-  
+
 
 }

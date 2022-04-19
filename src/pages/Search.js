@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 class Search extends Component {
@@ -6,7 +7,8 @@ class Search extends Component {
     return (
       <div data-testid="page-search">
         <Header />
-        <p>busca</p>
+       {/*  <Link to="/favorites">Musica</Link>
+        <Link to="/profile">Perfil</Link> */}
       </div>
     );
   }

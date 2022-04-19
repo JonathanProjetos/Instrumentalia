@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Carregando from './Carregando';
 
@@ -30,13 +31,17 @@ class Header extends Component {
 
   render() {
     const { status, name } = this.state;
-    console.log(name.name);
     return (
-      <section data-testid="header-component">
-        <nav data-testid="header-user-name">
-          {status ? <Carregando /> : <h1>{ name }</h1> }
+      <header data-testid="header-component">
+        <nav>
+          <Link data-testid="link-to-search" to="/search">Pesquisa</Link>
+          <Link data-testid="link-to-favorites" to="/favorites">Favoritos</Link>
+          <Link data-testid="link-to-profile" to="/profile">Perfil</Link>
         </nav>
-      </section>
+        <nav data-testid="header-user-name">
+          {status ? <Carregando /> : <h1>{name}</h1>}
+        </nav>
+      </header>
     );
   }
 }
