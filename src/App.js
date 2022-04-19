@@ -13,9 +13,9 @@ class App extends React.Component {
   render() {
     return (
       <section className="route-container">
-        <h1>Tunes</h1>
+        <h1 className="titulo">Tunes</h1>
         <Switch>
-          <Route exact path="/" render={ () => <Login /> } />
+          <Route exact path="/" render={ (props) => <Login { ...props } /> } />
           <Route exact path="/search" render={ () => <Search /> } />
           <Route exact path="/album/:id" render={ () => <Album /> } />
           <Route exact path="/favorites" render={ () => <Favorites /> } />
