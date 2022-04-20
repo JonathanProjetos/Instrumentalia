@@ -41,7 +41,7 @@ class Search extends Component {
   };
 
   render() {
-    const { nomeArtista, btnValidate, loading } = this.state;
+    const { btnValidate, loading } = this.state;
     return (
       <div data-testid="page-profile">
         <Header />
