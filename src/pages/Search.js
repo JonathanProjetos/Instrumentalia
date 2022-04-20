@@ -58,11 +58,12 @@ class Search extends Component {
     return (
       <section className="form-login-container">
         <div data-testid="page-search">
-          <Header />
-          <h1>{`Resultado de álbuns de: ${nomeArtista}`}</h1>
-          {loading ? <Carregando /> : (
 
+          <Header />
+
+          {loading ? <Carregando /> : (
             <form>
+              <h1>{`Resultado de álbuns de: ${nomeArtista}`}</h1>
               <input
                 name="nomeArtista"
                 type="text"
@@ -82,16 +83,19 @@ class Search extends Component {
           )}
         </div>
         {albuns.length === 0 ? <p>Nenhum álbum foi encontrado</p> : (
+
           albuns.map((elm) => (
-            <div key={ elm.artistId }>
+            <div key={ elm.collectionId }>
               <div>
                 <p>{ elm.artistName }</p>
                 <img src={ elm.artworkUrl100 } alt="foto da banda" />
                 <p>{ elm.collectionName }</p>
+                <p>{ elm.collectionPrice }</p>
+                <p>{ elm.releaseDate }</p>
               </div>
               <Link
-                data-testid={ `link-to-album-${elm.artistId}` }
-                to="/album/:id"
+                data-testid={ `link-to-album-${elm.collectionId}` }
+                to={ `/album/${elm.collectionId}` }
               >
                 collectionId
 
