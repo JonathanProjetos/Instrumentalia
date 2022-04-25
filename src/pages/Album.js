@@ -10,7 +10,7 @@ class Album extends Component {
     super();
     this.state = {
       loading: true,
-      valorApi: '',
+      valorApi: [],
       albumNãoFiltrado: '',
     };
   }
@@ -19,9 +19,8 @@ class Album extends Component {
     this.getMusic();
   }
 
-  getMusic= async () => {
+  getMusic = async () => {
     const { match: { params: { id } } } = this.props;
-
     this.setState({
       loading: true,
     });
@@ -38,12 +37,17 @@ class Album extends Component {
     });
   }
 
+  loadingMagicCard = (bool) => {
+    this.setState({
+      loading: bool,
+    });
+  }
+
   render() {
-    const { valorApi, loading, albumNãoFiltrado } = this.state;
+    const { valorApi, loading, albumNãoFiltrado, favoritas } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
-
         <div>
           <p
             data-testid="artist-name"
@@ -57,20 +61,17 @@ class Album extends Component {
         </div>
 
         <section>
-          {loading ? <Carregando /> : (
-
-            valorApi.map((music) => (
-
-              <div key={ music.trackId }>
-
-                <MusicCard
-                  trackName={ music.trackName }
-                  previewUrl={ music.previewUrl }
-                />
-
-              </div>
-            ))
-          )}
+          <Carregando disable={ !loading } />
+          {valorApi.map((music) => (
+            <div key={ music.trackId }>
+              <MusicCard
+                music={ music }
+                hidden={ loading }
+                loadingMagicCard={ this.loadingMagicCard }
+                favotitas={ favoritas }
+              />
+            </div>
+          ))}
         </section>
       </div>
     );

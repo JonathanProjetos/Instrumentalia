@@ -21,7 +21,6 @@ class Header extends Component {
       status: true,
     }, async () => {
       const pegarGetuser = await getUser();
-      console.log(pegarGetuser);
       this.setState({
         status: false,
         name: pegarGetuser.name,
