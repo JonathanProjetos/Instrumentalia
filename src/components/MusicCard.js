@@ -26,6 +26,9 @@ class MusicCard extends Component {
     loadingMagicCard(true);
     await addSong(music);
     loadingMagicCard(false);
+    if (checked) {
+      await removeSong(music);
+    }
   }
 
   getfavoriteSong = async () => {
