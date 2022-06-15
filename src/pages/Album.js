@@ -4,6 +4,7 @@ import Carregando from '../components/Carregando';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
+import { StyleAlbum, StyleList, StyleBackground } from '../Style/Album';
 
 class Album extends Component {
   constructor() {
@@ -45,35 +46,41 @@ class Album extends Component {
 
   render() {
     const { valorApi, loading, albumNãoFiltrado, favoritas } = this.state;
+    console.log(albumNãoFiltrado);
     return (
-      <div data-testid="page-album">
+      <StyleBackground data-testid="page-album">
         <Header />
-        <div>
-          <p
-            data-testid="artist-name"
-          >
-            {`Nome do Artista: ${albumNãoFiltrado.artistName}`}
-          </p>
+        <StyleAlbum>
+          <div>
+            <p
+              data-testid="artist-name"
+            >
+              {`Nome do Artista: ${albumNãoFiltrado.artistName}`}
+            </p>
 
-          <p data-testid="album-name">
-            {`Album: ${albumNãoFiltrado.collectionName}`}
-          </p>
-        </div>
-
-        <section>
-          <Carregando disable={ !loading } />
-          {valorApi.map((music) => (
-            <div key={ music.trackId }>
-              <MusicCard
-                music={ music }
-                hidden={ loading }
-                loadingMagicCard={ this.loadingMagicCard }
-                favotitas={ favoritas }
-              />
+            <p data-testid="album-name">
+              {`Album: ${albumNãoFiltrado.collectionName}`}
+            </p>
+            <div>
+              <img src={ albumNãoFiltrado.artworkUrl100 } alt="imagem capa" />
             </div>
-          ))}
-        </section>
-      </div>
+          </div>
+
+          <StyleList>
+            <Carregando disable={ !loading } />
+            {valorApi.map((music) => (
+              <div key={ music.trackId }>
+                <MusicCard
+                  music={ music }
+                  hidden={ loading }
+                  loadingMagicCard={ this.loadingMagicCard }
+                  favotitas={ favoritas }
+                />
+              </div>
+            ))}
+          </StyleList>
+        </StyleAlbum>
+      </StyleBackground>
     );
   }
 }

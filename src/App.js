@@ -7,13 +7,16 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
-import './app.css';
+import './Style/style.css';
+import { StyleHeader, StyleTitle } from './Style/Header';
 
 class App extends React.Component {
   render() {
     return (
-      <section className="route-container">
-        <h1 className="titulo">Tunes</h1>
+      <StyleHeader className="route-container">
+        <StyleTitle>
+          <h1>Tunes</h1>
+        </StyleTitle>
         <Switch>
           <Route exact path="/" render={ (props) => <Login { ...props } /> } />
           <Route exact path="/search" render={ () => <Search /> } />
@@ -23,7 +26,7 @@ class App extends React.Component {
           <Route exact path="/profile/edit" render={ () => <ProfileEdit /> } />
           <Route exact component={ NotFound } />
         </Switch>
-      </section>
+      </StyleHeader>
     );
   }
 }

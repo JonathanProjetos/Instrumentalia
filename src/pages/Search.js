@@ -1,8 +1,16 @@
+/* eslint-disable react/jsx-closing-tag-location */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Carregando from '../components/Carregando';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import {
+  StyleSearch,
+  StyleSearchDiv,
+  StyleMenssager,
+  StyleDivInput,
+  StyleSearch2,
+} from '../Style/Search';
 
 class Search extends Component {
   constructor() {
@@ -62,47 +70,56 @@ class Search extends Component {
           <Header />
 
           {loading ? <Carregando /> : (
-            <form>
-              <h1>{`Resultado de álbuns de: ${nomeArtista}`}</h1>
-              <input
-                name="nomeArtista"
-                type="text"
-                data-testid="search-artist-input"
-                onChange={ this.handleChange }
-              />
-
-              <button
-                type="submit"
-                data-testid="search-artist-button"
-                onClick={ this.handleClick }
-                disabled={ btnValidate }
-              >
-                Pesquisar
-              </button>
-            </form>
+            <StyleSearch2>
+              <StyleDivInput>
+                <input
+                  name="nomeArtista"
+                  type="text"
+                  data-testid="search-artist-input"
+                  onChange={ this.handleChange }
+                  placeholder="Pesquise uma Música"
+                />
+                <button
+                  type="submit"
+                  data-testid="search-artist-button"
+                  onClick={ this.handleClick }
+                  disabled={ btnValidate }
+                >
+                  Pesquisar
+                </button>
+              </StyleDivInput>
+              <div>
+                <h1>{`Resultado da pesquisa: ${nomeArtista}`}</h1>
+              </div>
+            </StyleSearch2>
           )}
         </div>
-        {albuns.length === 0 ? <p>Nenhum álbum foi encontrado</p> : (
+        <StyleSearch>
+          {albuns.length === 0 ? <StyleMenssager>
+            Nenhum álbum foi encontrado
+          </StyleMenssager>
+            : (
 
-          albuns.map((elm) => (
-            <div key={ elm.collectionId }>
-              <div>
-                <p>{ elm.artistName }</p>
-                <img src={ elm.artworkUrl100 } alt="foto da banda" />
-                <p>{ elm.collectionName }</p>
-                <p>{ elm.collectionPrice }</p>
-                <p>{ elm.releaseDate }</p>
-              </div>
-              <Link
-                data-testid={ `link-to-album-${elm.collectionId}` }
-                to={ `/album/${elm.collectionId}` }
-              >
-                collectionId
+              albuns.map((elm) => (
+                <StyleSearchDiv key={ elm.collectionId }>
+                  <div>
+                    <h1>{ elm.artistName }</h1>
+                    <img src={ elm.artworkUrl100 } alt="foto da banda" />
+                    <p>{ elm.collectionName }</p>
+                    <p>{ elm.collectionPrice }</p>
+                    <p>{ elm.releaseDate }</p>
+                  </div>
+                  <Link
+                    data-testid={ `link-to-album-${elm.collectionId}` }
+                    to={ `/album/${elm.collectionId}` }
+                  >
+                    collection
 
-              </Link>
-            </div>
-          ))
-        )}
+                  </Link>
+                </StyleSearchDiv>
+              ))
+            )}
+        </StyleSearch>
       </section>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
 import Carregando from '../components/Carregando';
-import '../components/login.css';
+import { StyleLogin, StyleForm } from '../Style/Login';
 
 class Login extends Component {
   constructor() {
@@ -55,31 +55,34 @@ class Login extends Component {
   render() {
     const { loginName, login, buttonDisabled } = this.state;
     return (
-      <div data-testid="page-login" className="form-login-container">
+      <StyleLogin data-testid="page-login" className="form-login-container">
 
         { login ? <Carregando /> : (
-          <form>
-            <label htmlFor="name">
-              <input
-                name="loginName"
-                value={ loginName }
-                data-testid="login-name-input"
-                type="text"
-                onChange={ this.onInputChange }
-              />
-            </label>
+          <StyleForm>
+            <h1>Play Music</h1>
+            <div>
+              <label htmlFor="name">
+                <input
+                  name="loginName"
+                  value={ loginName }
+                  data-testid="login-name-input"
+                  placeholder="Nome do usuario"
+                  type="text"
+                  onChange={ this.onInputChange }
+                />
+              </label>
 
-            <button
-              type="button"
-              data-testid="login-submit-button"
-              disabled={ buttonDisabled }
-              onClick={ this.handleClick }
-            >
-              Entrar
-            </button>
-
-          </form>)}
-      </div>
+              <button
+                type="button"
+                data-testid="login-submit-button"
+                disabled={ buttonDisabled }
+                onClick={ this.handleClick }
+              >
+                Entrar
+              </button>
+            </div>
+          </StyleForm>)}
+      </StyleLogin>
     );
   }
 }

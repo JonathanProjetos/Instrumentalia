@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import carregando3 from '../Style/carregando3.gif';
 
 class Carregando extends Component {
   render() {
@@ -9,7 +10,7 @@ class Carregando extends Component {
 
     return (
       <div>
-        <p>Carregando...</p>
+        <img src={ carregando3 } alt="carregando" />
       </div>
     );
   }
