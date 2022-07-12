@@ -9,9 +9,7 @@ const globalStyles = createGlobalStyle;
 
 ReactDOM.render(
   <BrowserRouter>
-    <globalStyles>
         <App />
-    </globalStyles>
   </BrowserRouter>,
   document.getElementById('root'),
 );

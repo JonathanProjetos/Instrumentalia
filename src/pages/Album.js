@@ -75,6 +75,7 @@ class Album extends Component {
                   hidden={ loading }
                   loadingMagicCard={ this.loadingMagicCard }
                   favotitas={ favoritas }
+                  valorApi={ valorApi }
                 />
               </div>
             ))}

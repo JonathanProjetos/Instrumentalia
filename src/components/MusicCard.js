@@ -81,7 +81,7 @@ MusicCard.propTypes = {
     trackName: PropTypes.string.isRequired,
   }).isRequired,
   hidden: PropTypes.bool.isRequired,
-  loadingMagicCard: PropTypes.func.isRequired,
+  // loadingMagicCard: PropTypes.func.isRequired,
 };
 
 export default MusicCard;
