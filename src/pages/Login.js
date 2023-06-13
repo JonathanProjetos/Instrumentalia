@@ -1,90 +1,72 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 import { createUser } from '../services/userAPI';
 import Carregando from '../components/Carregando';
-import { StyleLogin, StyleForm } from '../Style/Login';
 
-class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loginName: '',
-      buttonDisabled: true,
-      login: false,
-    };
-    this.onInputChange = this.onInputChange.bind(this);
-  }
+function Login() {
+  const SIX = 6;
+  const history = useHistory();
 
-  onInputChange({ target }) {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    }, () => {
-      this.validação();
-    });
-  }
+  const [loginName, setLoginName] = useState('');
+  const [login, setLogin] = useState(false);
 
-  validação = () => {
-    const { loginName } = this.state;
-    const dois = 2;
-
-    if (loginName.length > dois) {
-      this.setState({
-        buttonDisabled: false,
-      });
-    } else {
-      this.setState({
-        buttonDisabled: true,
-      });
-    }
-  }
-
-  handleClick = async () => {
-    const { loginName } = this.state;
-    const { history } = this.props;
-    this.setState({
-      login: true,
-    });
+  const handleClick = async () => {
+    setLogin(true);
     await createUser({ name: loginName });
-    this.setState({
-      login: false,
-    });
+    setLogin(false);
     history.push('/search');
-  }
+  };
 
-  render() {
-    const { loginName, login, buttonDisabled } = this.state;
-    return (
-      <StyleLogin data-testid="page-login" className="form-login-container">
+  return (
+    <Container component="main" maxWidth="xs">
+      { login ? <Carregando /> : (
+        <Box
+          sx={ {
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          } }
+        >
+          <Box component="form">
+            <Typography variant="h2">Instrumentalia</Typography>
+            <Box
+              sx={ {
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              } }
+            >
+              <TextField
+                name="loginName"
+                value={ loginName }
+                data-testid="login-name-input"
+                placeholder="What is your name?"
+                type="text"
+                onChange={ ({ target }) => setLoginName(target.value) }
+              />
 
-        { login ? <Carregando /> : (
-          <StyleForm>
-            <h1>Play Music</h1>
-            <div>
-              <label htmlFor="name">
-                <input
-                  name="loginName"
-                  value={ loginName }
-                  data-testid="login-name-input"
-                  placeholder="Nome do usuario"
-                  type="text"
-                  onChange={ this.onInputChange }
-                />
-              </label>
-
-              <button
+              <Button
+                color="secondary"
                 type="button"
                 data-testid="login-submit-button"
-                disabled={ buttonDisabled }
-                onClick={ this.handleClick }
+                disabled={ loginName.length < SIX }
+                onClick={ handleClick }
               >
-                Entrar
-              </button>
-            </div>
-          </StyleForm>)}
-      </StyleLogin>
-    );
-  }
+                { loginName.length < SIX ? 'Close' : 'Play'}
+              </Button>
+            </Box>
+          </Box>
+        </Box>)}
+    </Container>
+  );
 }
 Login.propTypes = {
   history: PropTypes.shape({
@@ -93,3 +75,50 @@ Login.propTypes = {
 };
 
 export default Login;
+/*
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="fullname"
+                  required
+                  fullWidth
+                  id="fullname"
+                  label="Full Name"
+                  autoFocus
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+*/
