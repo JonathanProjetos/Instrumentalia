@@ -4,13 +4,6 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Carregando from '../components/Carregando';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import {
-  StyleSearch,
-  StyleSearchDiv,
-  StyleMenssager,
-  StyleDivInput,
-  StyleSearch2,
-} from '../Style/Search';
 
 class Search extends Component {
   constructor() {
@@ -70,8 +63,8 @@ class Search extends Component {
           <Header />
 
           {loading ? <Carregando /> : (
-            <StyleSearch2>
-              <StyleDivInput>
+            <div>
+              <div>
                 <input
                   name="nomeArtista"
                   type="text"
@@ -87,21 +80,21 @@ class Search extends Component {
                 >
                   Pesquisar
                 </button>
-              </StyleDivInput>
+              </div>
               <div>
                 <h1>{`Resultado da pesquisa: ${nomeArtista}`}</h1>
               </div>
-            </StyleSearch2>
+            </div>
           )}
         </div>
-        <StyleSearch>
-          {albuns.length === 0 ? <StyleMenssager>
+        <div>
+          {albuns.length === 0 ? <p>
             Nenhum álbum foi encontrado
-          </StyleMenssager>
+          </p>
             : (
 
               albuns.map((elm) => (
-                <StyleSearchDiv key={ elm.collectionId }>
+                <div key={ elm.collectionId }>
                   <div>
                     <h1>{ elm.artistName }</h1>
                     <img src={ elm.artworkUrl100 } alt="foto da banda" />
@@ -116,10 +109,10 @@ class Search extends Component {
                     collection
 
                   </Link>
-                </StyleSearchDiv>
+                </div>
               ))
             )}
-        </StyleSearch>
+        </div>
       </section>
     );
   }

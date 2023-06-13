@@ -4,7 +4,6 @@ import Carregando from '../components/Carregando';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
-import { StyleAlbum, StyleList, StyleBackground } from '../Style/Album';
 
 class Album extends Component {
   constructor() {
@@ -48,9 +47,9 @@ class Album extends Component {
     const { valorApi, loading, albumNãoFiltrado, favoritas } = this.state;
     console.log(albumNãoFiltrado);
     return (
-      <StyleBackground data-testid="page-album">
+      <main data-testid="page-album">
         <Header />
-        <StyleAlbum>
+        <section>
           <div>
             <p
               data-testid="artist-name"
@@ -66,7 +65,7 @@ class Album extends Component {
             </div>
           </div>
 
-          <StyleList>
+          <div>
             <Carregando disable={ !loading } />
             {valorApi.map((music) => (
               <div key={ music.trackId }>
@@ -79,9 +78,9 @@ class Album extends Component {
                 />
               </div>
             ))}
-          </StyleList>
-        </StyleAlbum>
-      </StyleBackground>
+          </div>
+        </section>
+      </main>
     );
   }
 }
