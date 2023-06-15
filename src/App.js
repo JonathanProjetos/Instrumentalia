@@ -8,12 +8,14 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
-import Copyright from './components/Footer';
+import Footer from './components/Footer';
 import Theme from './Style/Theme';
+import ResetCSS from './Style/ResetCSS';
 
 function App() {
   return (
     <ThemeProvider theme={ Theme }>
+      <ResetCSS />
       <Switch>
         <Route exact path="/" render={ () => <Login /> } />
         <Route exact path="/search" render={ () => <Search /> } />
@@ -23,7 +25,7 @@ function App() {
         <Route exact path="/profile/edit" render={ () => <ProfileEdit /> } />
         <Route exact component={ NotFound } />
       </Switch>
-      <Copyright />
+      <Footer />
     </ThemeProvider>
   );
 }

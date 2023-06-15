@@ -24,7 +24,18 @@ function Login() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      component="main"
+      sx={ {
+        width: '100vw',
+        height: '98vh',
+        border: '12px solid green',
+        display: 'flex',
+        justifyContent: 'center',
+        backgroundImage: 'url(https://www.geffa.org.br/wp-content/uploads/2019/06/musica-03.png)',
+        alignItems: 'center',
+      } }
+    >
       { login ? <Carregando /> : (
         <Box
           sx={ {
@@ -32,10 +43,31 @@ function Login() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            // bgcolor: 'white',
+            backgroundColor: 'transparent',
           } }
         >
-          <Box component="form">
-            <Typography variant="h2">Instrumentalia</Typography>
+          <Box
+            component="form"
+            sx={ {
+              borderRadius: '10px',
+              border: '2px solid #795548',
+              boxShadow: 24,
+              height: '50vh',
+              width: '40vw',
+              filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.6))',
+            } }
+          >
+            <Typography
+              component="h1"
+              style={ {
+                fontFamily: 'Lobster, cursive',
+                fontSize: '4rem',
+                textAlign: 'center',
+              } }
+            >
+              Instrumentalia
+            </Typography>
             <Box
               sx={ {
                 marginTop: 8,
@@ -54,11 +86,14 @@ function Login() {
               />
 
               <Button
-                color="secondary"
+                color="primary"
                 type="button"
                 data-testid="login-submit-button"
                 disabled={ loginName.length < SIX }
                 onClick={ handleClick }
+                style={ {
+                  marginTop: '20px',
+                } }
               >
                 { loginName.length < SIX ? 'Close' : 'Play'}
               </Button>
@@ -75,50 +110,3 @@ Login.propTypes = {
 };
 
 export default Login;
-/*
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="fullname"
-                  required
-                  fullWidth
-                  id="fullname"
-                  label="Full Name"
-                  autoFocus
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-*/
