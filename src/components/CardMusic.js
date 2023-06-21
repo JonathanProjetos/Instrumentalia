@@ -12,7 +12,9 @@ import { useHistory } from 'react-router-dom';
 function CardMusic({ artworkUrl100, collectionName, price, ReleaseDate, collectionId }) {
   const history = useHistory();
   return (
-    <Card sx={ { maxWidth: 250 } }>
+    <Card
+      sx={ { minWidth: 250 } }
+    >
       <CardMedia
         sx={ { height: 150 } }
         image={ artworkUrl100 }
