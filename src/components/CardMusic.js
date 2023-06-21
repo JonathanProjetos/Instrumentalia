@@ -13,7 +13,7 @@ function CardMusic({ artworkUrl100, collectionName, price, ReleaseDate, collecti
   const history = useHistory();
   return (
     <Card
-      sx={ { minWidth: 250 } }
+      sx={ { maxWidth: 250 } }
     >
       <CardMedia
         sx={ { height: 150 } }
