@@ -1,11 +1,11 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
 import { createUser } from '../services/userAPI';
 import Carregando from '../components/Carregando';
 
@@ -24,16 +24,17 @@ function Login() {
   };
 
   return (
-    <Container
+    <Box
       component="main"
       sx={ {
         width: '100vw',
-        height: '98vh',
-        border: '12px solid green',
+        height: '95vh',
         display: 'flex',
         justifyContent: 'center',
-        backgroundImage: 'url(https://www.geffa.org.br/wp-content/uploads/2019/06/musica-03.png)',
         alignItems: 'center',
+      } }
+      style={ {
+        backgroundColor: 'var(--background)',
       } }
     >
       { login ? <Carregando /> : (
@@ -44,26 +45,24 @@ function Login() {
             flexDirection: 'column',
             alignItems: 'center',
             // bgcolor: 'white',
-            backgroundColor: 'transparent',
+            // backgroundColor: 'transparent',
           } }
         >
           <Box
             component="form"
             sx={ {
-              borderRadius: '10px',
-              border: '2px solid #795548',
-              boxShadow: 24,
+              // boxShadow: 24,
               height: '50vh',
               width: '40vw',
-              filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.6))',
             } }
           >
             <Typography
               component="h1"
               style={ {
                 fontFamily: 'Lobster, cursive',
-                fontSize: '4rem',
+                fontSize: '7vw',
                 textAlign: 'center',
+                color: 'var(--paragraph)',
               } }
             >
               Instrumentalia
@@ -76,11 +75,20 @@ function Login() {
                 alignItems: 'center',
               } }
             >
-              <TextField
+              <Input
                 name="loginName"
                 value={ loginName }
                 data-testid="login-name-input"
                 placeholder="What is your name?"
+                style={ {
+                  // border: '3px solid var(--paragraph)',
+                  backgroundColor: 'var(--background)',
+                  borderBottom: '2px solid var(--paragraph)',
+                  // width: '15vw',
+                  fontSize: '18px',
+                  color: '#6b6b6b',
+                  marginBottom: '20px',
+                } }
                 type="text"
                 onChange={ ({ target }) => setLoginName(target.value) }
               />
@@ -93,6 +101,8 @@ function Login() {
                 onClick={ handleClick }
                 style={ {
                   marginTop: '20px',
+                  backgroundColor: 'var(--paragraph)',
+                  color: 'var(--headline)',
                 } }
               >
                 { loginName.length < SIX ? 'Close' : 'Play'}
@@ -100,7 +110,7 @@ function Login() {
             </Box>
           </Box>
         </Box>)}
-    </Container>
+    </Box>
   );
 }
 Login.propTypes = {
