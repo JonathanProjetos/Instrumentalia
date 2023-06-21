@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from 'styled-components';
 import Login from './pages/Login';
 import Search from './pages/Search';
 import Album from './pages/Album';
@@ -9,12 +9,14 @@ import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
-import Theme from './Style/Theme';
+import Context from './context/Context';
+import { paleteDark, paleteLight } from './Style/Palete';
 import ResetCSS from './Style/ResetCSS';
 
 function App() {
+  const { theme } = useContext(Context);
   return (
-    <ThemeProvider theme={ Theme }>
+    <ThemeProvider theme={ theme === 'light' ? paleteLight : paleteDark }>
       <ResetCSS />
       <Switch>
         <Route exact path="/" render={ () => <Login /> } />
