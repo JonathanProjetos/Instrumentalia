@@ -10,8 +10,8 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
 import Context from './context/Context';
-import { paleteDark, paleteLight } from './Style/Palete';
-import ResetCSS from './Style/ResetCSS';
+import { paleteDark, paleteLight } from './style/Palete';
+import ResetCSS from './style/ResetCSS';
 
 function App() {
   const { theme } = useContext(Context);
