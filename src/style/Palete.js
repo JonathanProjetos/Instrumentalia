@@ -3,6 +3,7 @@ export const paleteDark = {
   main: '#fffffe',
   headline: '#0d0d0d',
   paragraph: '#a7a9be',
+  card: '#8d8d8d',
   // buttonBorder:
   buttonText: '#fffffe',
   buttonBackground: '#ff8906',
@@ -19,6 +20,7 @@ export const paleteLight = {
   main: '#eff0f3',
   headline: '#fffffe',
   paragraph: '#2a2a2a',
+  card: 'white',
   // buttonBorder:
   buttonText: '#0d0d0d',
   buttonBackground: '#ff8e3c',

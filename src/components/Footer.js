@@ -25,7 +25,7 @@ function Footer() {
       style={ { backgroundColor: 'var(--background)' } }
     >
       <Stack
-        direction={ { xs: 'column', sm: 'row' } }
+        direction={ { xs: 'row', sm: 'row' } }
         spacing={ 2 }
         sx={ { alignItems: 'center', width: '100vw' } }
       >
