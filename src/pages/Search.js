@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
-import Typhography from '@mui/material/Typography';
 import Header from '../components/Header';
 import Carregando from '../components/Carregando';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
@@ -45,83 +44,87 @@ function Search() {
       <Header />
       <Box
         sx={ {
-          width: '99vw',
+          width: '98vw',
           height: '90vh',
           flexDirection: 'column',
         } }
       >
         {loading ? <Carregando /> : (
           <Box>
-            <Box
-              sx={ {
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: '40px',
-              } }
-            >
-              <Input
-                name="nomeArtista"
-                type="text"
-                data-testid="search-artist-input"
-                onChange={ (event) => handleChange(event) }
-                placeholder="search a song"
-              />
-              <Button
-                type="submit"
-                data-testid="search-artist-button"
-                onClick={ handleClick }
-                disabled={ nomeArtista.length < ONE }
-                style={ {
-                  backgroundColor: 'var(--background)',
-                  fontSize: '18px',
-                  color: '#6b6b6b',
+            <Box>
+              <Box
+                sx={ {
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: '40px',
+                  marginBottom: '40px',
                 } }
               >
-                Search
-              </Button>
-            </Box>
-            <Box>
-              {
-                albuns.length > 0 ? <Typhography variant="h6">{ `Artist: ${nomeArtista}` }</Typhography> : ''
-              }
+                <Input
+                  name="nomeArtista"
+                  type="text"
+                  data-testid="search-artist-input"
+                  onChange={ (event) => handleChange(event) }
+                  placeholder="search a song"
+                  style={ {
+                    borderBottom: '2px solid #6b6b6b',
+                    color: 'white',
+                    fontSize: '18px',
+                    // marginBottom: '40px',
+                  } }
+                />
+                <Button
+                  type="submit"
+                  data-testid="search-artist-button"
+                  onClick={ handleClick }
+                  disabled={ nomeArtista.length < ONE }
+                  style={ {
+                    backgroundColor: 'var(--background)',
+                    fontSize: '18px',
+                    color: '#6b6b6b',
+                  } }
+                >
+                  Search
+                </Button>
+              </Box>
+              <Box
+                sx={ {
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                } }
+                style={ { maginButtom: '100px' } }
+              >
+                <Grid
+                  container
+                  spacing={ 4 }
+                  columnSpacing={ { xs: 1, sm: 2, md: 3 } }
+                  xs={ 8 }
+                >
+                  { albuns && albuns.map((
+                    { artworkUrl100, collectionName, price, ReleaseDate, collectionId },
+                    i,
+                  ) => (
+                    <Grid
+                      item xs={ 12 } sm={ 6 } md={ 3 }
+                      key={ i }
+                    >
+                      <CardMusic
+                        artworkUrl100={ artworkUrl100 }
+                        collectionName={ collectionName }
+                        price={ price }
+                        ReleaseDate={ ReleaseDate }
+                        collectionId={ collectionId }
+                      />
+                    </Grid>
+                  ))}
+
+                </Grid>
+              </Box>
             </Box>
           </Box>
         )}
-        <Box
-          sx={ {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          } }
-          style={ { maginButtom: '100px' } }
-        >
-          <Grid
-            container
-            spacing={ 4 }
-            columnSpacing={ { xs: 1, sm: 2, md: 3 } }
-            xs={ 8 }
-          >
-            { albuns && albuns.map((
-              { artworkUrl100, collectionName, price, ReleaseDate, collectionId },
-              i,
-            ) => (
-              <Grid
-                item xs={ 12 } sm={ 6 } md={ 3 }
-                key={ i }
-              >
-                <CardMusic
-                  artworkUrl100={ artworkUrl100 }
-                  collectionName={ collectionName }
-                  price={ price }
-                  ReleaseDate={ ReleaseDate }
-                  collectionId={ collectionId }
-                />
-              </Grid>
-            ))}
-
-          </Grid>
-        </Box>
       </Box>
     </Box>
   );
