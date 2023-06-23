@@ -20,7 +20,7 @@ export const paleteLight = {
   main: '#eff0f3',
   headline: '#fffffe',
   paragraph: '#2a2a2a',
-  card: 'white',
+  card: 'black',
   // buttonBorder:
   buttonText: '#0d0d0d',
   buttonBackground: '#ff8e3c',

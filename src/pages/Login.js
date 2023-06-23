@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Input from '@mui/material/Input';
 import { createUser } from '../services/userAPI';
-import Carregando from '../components/Carregando';
+import Carregando from '../components/Loading';
 
 function Login() {
   const SIX = 6;
@@ -81,12 +81,11 @@ function Login() {
                 data-testid="login-name-input"
                 placeholder="What is your name?"
                 style={ {
-                  // border: '3px solid var(--paragraph)',
                   backgroundColor: 'var(--background)',
                   borderBottom: '2px solid var(--paragraph)',
                   // width: '15vw',
                   fontSize: '18px',
-                  color: '#6b6b6b',
+                  // color: '#6b6b6b',
                   marginBottom: '20px',
                 } }
                 type="text"
