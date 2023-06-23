@@ -1,88 +1,72 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Carregando from '../components/Carregando';
+import Carregando from '../components/Loading';
 import Header from '../components/Header';
-import MusicCard from '../components/MusicCard';
+import CardMusicDatail from '../components/CardMusicDatail';
 import getMusics from '../services/musicsAPI';
 
-class Album extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      valorApi: [],
-      albumNãoFiltrado: '',
-    };
-  }
+function Album(props) {
+  const { match: { params: { id } } } = props;
 
-  componentDidMount() {
-    this.getMusic();
-  }
+  const [loading, setLoading] = useState(false);
+  const [valorApi, setValorApi] = useState([]);
+  const [albumNãoFiltrado, setAlbumNãoFiltrado] = useState('');
+  console.log(valorApi);
 
-  getMusic = async () => {
-    const { match: { params: { id } } } = this.props;
-    this.setState({
-      loading: true,
-    });
-
+  const getMusic = async () => {
+    setLoading(true);
     const resultadoApi = await getMusics(id);
+    const resultadoApiFiltrado = resultadoApi.filter((_music, index) => index !== 0);
+    setLoading(false);
+    setValorApi(resultadoApiFiltrado);
+    setAlbumNãoFiltrado(resultadoApi[0]);
+  };
 
-    // foi filtrado devido o indice 0 não e uma musica e sim um video.
-    const resultadoApiFiltrado = resultadoApi.filter((music, index) => index !== 0);
+  useEffect(() => {
+    getMusic();
+  }, []);
 
-    this.setState({
-      loading: false,
-      valorApi: resultadoApiFiltrado,
-      albumNãoFiltrado: resultadoApi[0],
-    });
-  }
+  // const loadingMagicCard = (bool) => {
+  //   setLoading(bool);
+  // };
 
-  loadingMagicCard = (bool) => {
-    this.setState({
-      loading: bool,
-    });
-  }
+  console.log(albumNãoFiltrado);
+  return (
+    <main data-testid="page-album">
+      <Header />
+      <section>
+        <div>
+          <p
+            data-testid="artist-name"
+          >
+            {`Nome do Artista: ${albumNãoFiltrado.artistName}`}
+          </p>
 
-  render() {
-    const { valorApi, loading, albumNãoFiltrado, favoritas } = this.state;
-    console.log(albumNãoFiltrado);
-    return (
-      <main data-testid="page-album">
-        <Header />
-        <section>
+          <p data-testid="album-name">
+            {`Album: ${albumNãoFiltrado.collectionName}`}
+          </p>
           <div>
-            <p
-              data-testid="artist-name"
-            >
-              {`Nome do Artista: ${albumNãoFiltrado.artistName}`}
-            </p>
+            <img src={ albumNãoFiltrado.artworkUrl100 } alt="imagem capa" />
+          </div>
+        </div>
 
-            <p data-testid="album-name">
-              {`Album: ${albumNãoFiltrado.collectionName}`}
-            </p>
-            <div>
-              <img src={ albumNãoFiltrado.artworkUrl100 } alt="imagem capa" />
+        <div>
+          <Carregando disable={ !loading } />
+          {valorApi.map((music) => (
+            <div key={ music.trackId }>
+              <CardMusicDatail
+                music={ music }
+                hidden={ loading }
+                // loadingMagicCard={ loadingMagicCard }
+                // favotitas={ favoritas }
+                // valorApi={ valorApi }
+              />
             </div>
-          </div>
-
-          <div>
-            <Carregando disable={ !loading } />
-            {valorApi.map((music) => (
-              <div key={ music.trackId }>
-                <MusicCard
-                  music={ music }
-                  hidden={ loading }
-                  loadingMagicCard={ this.loadingMagicCard }
-                  favotitas={ favoritas }
-                  valorApi={ valorApi }
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-      </main>
-    );
-  }
+          ))}
+        </div>
+      </section>
+    </main>
+  );
 }
 
 Album.propTypes = {
