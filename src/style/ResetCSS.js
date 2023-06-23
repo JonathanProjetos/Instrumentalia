@@ -24,14 +24,12 @@ export default createGlobalStyle`
     --main: ${({ theme }) => theme.main};
     --headline: ${({ theme }) => theme.headline};
     --paragraph: ${({ theme }) => theme.paragraph};
-    /* --buttonBorder: ${({ theme }) => theme.buttonBorder}; */
     --buttonText: ${({ theme }) => theme.buttonText};
     --buttonBackground: ${({ theme }) => theme.buttonBackground};
     --buttonBackgroundDisabled: ${({ theme }) => theme.buttonBackgroundDisabled};
     --secundary: ${({ theme }) => theme.secundary};
-    /* --secundaryHover: ${({ theme }) => theme.secundaryHover}; */
     --tertiary: ${({ theme }) => theme.tertiary};
     --highligth: ${({ theme }) => theme.extra};
-    /* --extraHover: ${({ theme }) => theme.extraHover}; */
+    --card: ${({ theme }) => theme.card};
   }
 `;

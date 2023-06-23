@@ -7,7 +7,8 @@ import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
 import Header from '../components/Header';
-import Carregando from '../components/Carregando';
+import Loading from '../components/Loading';
+import image from '../images/image';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import CardMusic from '../components/CardMusic';
 
@@ -16,7 +17,8 @@ function Search() {
   const [nomeArtista, setNomeArtista] = useState('');
   const [albuns, setAlbuns] = useState('');
   const [loading, setLoading] = useState(false);
-
+  // const [lodingScreen, setLodingScreen] = useState(false);
+  console.log(loading);
   console.log(nomeArtista);
 
   const handleChange = ({ target }) => {
@@ -24,12 +26,20 @@ function Search() {
     setNomeArtista(value);
   };
 
+  // const waitRequest = () => {
+  //   setLodingScreen(true);
+  //   setTimeout(() => {
+  //     setLodingScreen(false);
+  //   }, 4000);
+  // };
+
   const handleClick = async () => {
     setLoading(true);
     const retornoApi = await searchAlbumsAPI(nomeArtista);
     setLoading(false);
     localStorage.setItem('albuns', JSON.stringify(retornoApi));
     setAlbuns(retornoApi);
+    // waitRequest();
   };
 
   useEffect(() => {
@@ -49,7 +59,11 @@ function Search() {
           flexDirection: 'column',
         } }
       >
-        {loading ? <Carregando /> : (
+        {loading ? <Loading
+          src={ image.loading.src }
+          alt={ image.loading.alt }
+          disable={ loading }
+        /> : (
           <Box>
             <Box>
               <Box
@@ -69,7 +83,7 @@ function Search() {
                   placeholder="search a song"
                   style={ {
                     borderBottom: '2px solid #6b6b6b',
-                    color: 'white',
+                    color: 'var(--card)',
                     fontSize: '18px',
                     // marginBottom: '40px',
                   } }

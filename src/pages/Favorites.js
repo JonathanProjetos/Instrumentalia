@@ -1,60 +1,45 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
-import MusicCard from '../components/MusicCard';
-import Carregando from '../components/Carregando';
+import CardMusicDatail from '../components/CardMusicDatail';
+import Carregando from '../components/Loading';
 
-class Favorites extends Component {
-  constructor() {
-    super();
-    this.state = {
-      musicFavorites: [],
-      loading: false,
-      fotoLogo: '',
-    };
-  }
+function Favorites() {
+  const [musicFavorites, setMusicFavorites] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [fotoLogo, setFotoLogo] = useState('');
 
-  componentDidMount() {
-    this.getMusicFavorites();
-  }
-
-  getMusicFavorites = async () => {
-    this.setState({
-      loading: true,
-    });
+  const getMusicFavorites = async () => {
+    setLoading(true);
     const favoritos = await getFavoriteSongs();
 
     if (favoritos.length !== 0) {
       console.log('óla');
-      this.setState({
-        fotoLogo: favoritos[0].artworkUrl100,
-      });
+      setFotoLogo(favoritos[0].artworkUrl100);
     }
+    setMusicFavorites(favoritos);
+    setLoading(false);
+  };
 
-    this.setState({
-      musicFavorites: [...favoritos],
-      loading: false,
-    });
-  }
+  useEffect(() => {
+    getMusicFavorites();
+  }, [musicFavorites]);
 
-  render() {
-    const { musicFavorites, loading, fotoLogo } = this.state;
-    console.log(musicFavorites);
-    return (
-      <div data-testid="page-favorites">
-        <Header />
-        <img src={ fotoLogo } alt="fotoLogo" />
-        <Carregando disable={ !loading } />
-        {musicFavorites.map((music) => (
-          <div key={ music.trackId }>
-            <MusicCard
-              music={ music }
-              hidden={ loading }
-            />
-          </div>
-        ))}
-      </div>
-    );
-  }
+  return (
+    <div data-testid="page-favorites">
+      <Header />
+      <img src={ fotoLogo } alt="fotoLogo" />
+      <Carregando disable={ !loading } />
+      {musicFavorites.map((music) => (
+        <div key={ music.trackId }>
+          <CardMusicDatail
+            music={ music }
+            hidden={ loading }
+          />
+        </div>
+      ))}
+    </div>
+  );
 }
+
 export default Favorites;
